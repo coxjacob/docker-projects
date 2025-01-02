@@ -8,7 +8,7 @@ services:
     image: read-python-app  # Name of the Docker image
     container_name: python-read-container  # Name of the container
     build: 
-      context: ./  
+      context: ./Docker_Volumes/  
       dockerfile: Dockerfile  # The Dockerfile to use for building the image 
     volumes:
       - input_files:/app/input_files
