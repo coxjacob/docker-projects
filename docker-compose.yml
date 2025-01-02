@@ -1,0 +1,20 @@
+# Name the stack
+name: python_stack
+
+# Create service
+services:
+  # Name of Service
+  python_read:
+    image: read-python-app  # Name of the Docker image
+    container_name: python-read-container  # Name of the container
+    build: 
+      context: ./  
+      dockerfile: Dockerfile  # The Dockerfile to use for building the image 
+    volumes:
+      - input_files:/app/input_files
+      - output_files:/app/export_files
+    #command: python3 -u read_write.py
+
+volumes:
+  input_files:
+  output_files:
