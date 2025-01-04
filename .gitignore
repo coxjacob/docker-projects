@@ -1,0 +1,7 @@
+volumes/
+.ipynb_checkpoints/
+milvus-env/
+SMSSpamCollection
+*.pxd
+*.pyi
+*.pyc

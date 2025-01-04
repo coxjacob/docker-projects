@@ -1,0 +1,6 @@
+pymilvus >= 2.2.8 
+protobuf 
+grpcio-tools 
+numpy
+pandas
+
