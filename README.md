@@ -9,14 +9,21 @@ This code is executed on Docker Desktop
 To make it easy for you to get started with GitLab, here's a list of recommended 
 next steps.
 
-To run: 
-```
-cd directory
-docker compose up -d --build
-```
-
 ## Folders
 ### Docker_Volumes
 
 This folder demonstrates the use of volumes with a single container. This code uses a Dockerfile and docker-compose.yml file to create a container and two volumes. The container reads from one volume, input_files, and rights 
 to another, export_files.
+
+To Start the Container
+```
+docker-compose -f docker-compose-dv.yml up -d
+```
+To Remove the Containers
+```
+docker-compose -f docker-compose-dv.ym down
+```
+To Stop and Keep the containers
+```
+docker-compose -f docker-compose-dv.ym stop
+```
