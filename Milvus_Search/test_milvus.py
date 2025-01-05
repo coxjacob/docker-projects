@@ -5,13 +5,26 @@ import tensorflow_hub as hub
 import numpy as np
 import os
 import re
+
 from pymilvus import Collection, FieldSchema, CollectionSchema, DataType, connections, utility
 
+import logging
+
+# Configure the logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Create a logger
+logger = logging.getLogger(__name__)
+
+# Start logging
+logger.info('Connecting to Milvus Server')
+# Connect to milvus database
 connections.connect(
-    alias="default",
-    host="localhost",
-    port="19530"
+  alias="default",
+  host='localhost',
+  port='19530'
 )
+
 
 # Download the model and load the model
 module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/5" #@param ["https://tfhub.dev/google/universal-sentence-encoder/4", "https://tfhub.dev/google/universal-sentence-encoder-large/5"]
@@ -27,8 +40,12 @@ def embeddings(text):
 # Download the dataset and extract the files before running this cell
 # We will create the embeddings from this dataset using the universal-sentence-encoder model
 
+
+print("*****Logging")
+logger.info('***Setting File Path')
 file_path = 'SMSSpamCollection'
 
+logger.info('***Accessing  File Path')
 with open(file_path) as file:
     lines = [line for line in file]
 
@@ -39,12 +56,7 @@ indx = list(range(1, len(msgs)+1))
 data_to_insert = [indx, msgs, embdngs]
 
 
-# Connect to milvus database
-connections.connect(
-  alias="default",
-  host='localhost',
-  port='19530'
-)
+
 
 # Field Schema
 id = FieldSchema(           #index

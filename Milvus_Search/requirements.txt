@@ -3,4 +3,6 @@ protobuf
 grpcio-tools 
 numpy
 pandas
+tensorflow
+tensorflow_hub
 

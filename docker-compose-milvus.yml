@@ -2,8 +2,7 @@ name: milvus_search
 version: '3.5'
 
 services:
-  # Name of Service
-  python_read:
+  python_read:   # Name of Service
     image: python_search  # Name of the Docker image
     container_name: search_api  # Name of the container
     build: 
@@ -16,15 +15,18 @@ services:
           action: sync
           target: /app/test_milvus.py
     #command: python3 -u read_write.py
+    environment:
+      STANDALONE_ADDRESS: standalone:19530
     ports:
-      - "19530:19530"
+      - "80:80"
+      - "443:443"
     depends_on:
-      - "etcd"
-      - "minio"
-      - "standalone"
+      standalone:
+        condition: service_healthy
+        restart: true
 
   etcd:
-    container_name: milvus-etcd
+    container_name: milv-etcd
     image: quay.io/coreos/etcd:v3.5.5
     environment:
       - ETCD_AUTO_COMPACTION_MODE=revision
@@ -41,7 +43,7 @@ services:
       retries: 3
 
   minio:
-    container_name: milvus-minio
+    container_name: milv-minio
     image: minio/minio:RELEASE.2023-03-20T20-16-18Z
     environment:
       MINIO_ACCESS_KEY: minioadmin
@@ -59,7 +61,7 @@ services:
       retries: 3
 
   standalone:
-    container_name: milvus-standalone
+    container_name: milv-standalone
     image: milvusdb/milvus:v2.3.21
     command: ["milvus", "run", "standalone"]
     security_opt:
