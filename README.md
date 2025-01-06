@@ -34,13 +34,13 @@ This folder demonstrates the use of networking, syncing, and more. Milvus search
 
 To Start the Container
 ```
-docker-compose -f docker-compose-milvus.yml up -d
+docker-compose -f docker-compose-m-cuda.yml up -d
 ```
 To Remove the Containers
 ```
-docker-compose -f docker-compose-milvus.ym down
+docker-compose -f docker-compose-m-cuda.yml down
 ```
 To Stop and Keep the containers
 ```
-docker-compose -f docker-compose-milvus.ym stop
+docker-compose -f docker-compose-m-cuda.yml stop
 ```

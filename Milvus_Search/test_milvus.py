@@ -9,6 +9,11 @@ import re
 from pymilvus import Collection, FieldSchema, CollectionSchema, DataType, connections, utility
 
 import logging
+import sys
+
+# Confirm GPU is engaged
+print("****Starting Code! ")
+print(tf.config.list_physical_devices('GPU'))
 
 # Configure the logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -17,14 +22,20 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 # Start logging
-logger.info('Connecting to Milvus Server')
+logger.info('***Connecting to Milvus Server')
 # Connect to milvus database
+connections.connect(
+      alias="default",
+      uri="tcp://standalone:19530"
+  )
+'''
 connections.connect(
   alias="default",
   host='localhost',
   port='19530'
 )
-
+'''
+logger.info('***Connected to Milvus Server')
 
 # Download the model and load the model
 module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/5" #@param ["https://tfhub.dev/google/universal-sentence-encoder/4", "https://tfhub.dev/google/universal-sentence-encoder-large/5"]
@@ -34,11 +45,6 @@ model = hub.load(module_url)
 def embeddings(text):
     "Function to generate embeddings"
     return np.array(model(text)).flatten().tolist()
-
-
-# Dataset available at https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
-# Download the dataset and extract the files before running this cell
-# We will create the embeddings from this dataset using the universal-sentence-encoder model
 
 
 print("*****Logging")
@@ -54,9 +60,6 @@ embdngs = [embeddings([x]) for x in msgs]
 indx = list(range(1, len(msgs)+1))
 
 data_to_insert = [indx, msgs, embdngs]
-
-
-
 
 # Field Schema
 id = FieldSchema(           #index

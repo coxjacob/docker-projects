@@ -4,7 +4,7 @@ This code has been adapted from the Udemy Course [Introduction to Milvus (Vector
 
 ## Getting started
 - Start the Milvus Container 
-  - docker-compose -f "docker-compose-milvus.yml" up -d 
+  - See README.md
 
 ## Validate Milvus is Running
 - Check Docker Desktop's Containers for milvus-u
@@ -14,18 +14,20 @@ This code has been adapted from the Udemy Course [Introduction to Milvus (Vector
   - milvus-standalone, ports 19530, 9091
 
 ## Shutting Down
+- See README.md
 
-- Shutdown Milvus container
-  - docker compose -f "milvus-standalone-docker-compose.yml" down 
-- Deactivate the virtual environment
-  - deactivate
 
-Git repository with the following command:
+## Future Work
+### Enable CUDA
+CUDA GPUs do not currently work on my implmentation. More work is needed to engage the GPU. 
+- [Install TensorFlow with pip](https://www.tensorflow.org/install/pip)
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/jacobcox1974/milvus-u.git
-git branch -M main
-git push -uf origin main
-```
+### Data Loader
+Data is currently storred in SMSSpamCollection. Need to automate the process of loading data. 
+
+### Volumes
+test_milvus.py downloads models and creates embeddings and a vector index. This data needs to be persisted beyond the codes initial run. 
+
+### Create an API
+This code is a proof of concept. An API needs to be built to support multiple search queries from a URL. Looking at routes to do it. 
 

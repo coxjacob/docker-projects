@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY test_milvus.py ./
 COPY SMSSpamCollection ./
 
-EXPOSE 80 443
+EXPOSE 8080
 
 # Lauch the Python App after the container starts
 CMD [ "python", "./test_milvus.py" ]
