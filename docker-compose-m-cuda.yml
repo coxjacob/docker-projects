@@ -104,9 +104,6 @@ services:
                - utility # nvidia-smi
                - compute # CUDA
 
-  
-
 networks:
   default:
     name: milvus
-

@@ -28,13 +28,7 @@ connections.connect(
       alias="default",
       uri="tcp://standalone:19530"
   )
-'''
-connections.connect(
-  alias="default",
-  host='localhost',
-  port='19530'
-)
-'''
+
 logger.info('***Connected to Milvus Server')
 
 # Download the model and load the model
@@ -55,10 +49,12 @@ logger.info('***Accessing  File Path')
 with open(file_path) as file:
     lines = [line for line in file]
 
+# Create embeddings
 msgs = [x.split('\t')[1].replace('\n', '')   for x in lines]
 embdngs = [embeddings([x]) for x in msgs]
 indx = list(range(1, len(msgs)+1))
 
+# Store index, messages, and embeddings
 data_to_insert = [indx, msgs, embdngs]
 
 # Field Schema
@@ -77,11 +73,13 @@ message_vec = FieldSchema(  #embdngs
   dtype=DataType.FLOAT_VECTOR,
   dim=512
 )
+
 # collection schema
 collection_schema = CollectionSchema(
   fields=[id, message, message_vec],
   description="Spam SMS collection"
 )
+
 # Create collection
 collection = Collection(
     name="Spam_Test",

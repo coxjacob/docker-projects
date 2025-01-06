@@ -1,6 +1,6 @@
 # milvus-u
 
-This code has been adapted from the Udemy Course [Introduction to Milvus (Vector Database) Using Python](https://www.udemy.com/course/getting-started-with-milvus-vector-database). 
+This code has been adapted from the Udemy Course [Introduction to Milvus (Vector Database) Using Python](https://www.udemy.com/course/getting-started-with-milvus-vector-database). The courese showed how to implement Milvus from Jupyter Notebook. This repository places the query code in its own container with a standalone python file. 
 
 ## Getting started
 - Start the Milvus Container 
@@ -8,10 +8,13 @@ This code has been adapted from the Udemy Course [Introduction to Milvus (Vector
 
 ## Validate Milvus is Running
 - Check Docker Desktop's Containers for milvus-u
-- Container contains:
+- Stack contains Milvus Containers:
   - milvus-etcd
   - milvus-minio, ports 9000, 9001
   - milvus-standalone, ports 19530, 9091
+- Query Container
+  - query_milvus (shuts down after running)
+    - Look at logs in Docker Desktop
 
 ## Shutting Down
 - See README.md
@@ -31,3 +34,6 @@ test_milvus.py downloads models and creates embeddings and a vector index. This 
 ### Create an API
 This code is a proof of concept. An API needs to be built to support multiple search queries from a URL. Looking at routes to do it. 
 
+## References
+1. [Milvus](https://github.com/milvus-io/milvus)
+2. [GPU Standalone](https://github.com/milvus-io/milvus/blob/master/deployments/docker/gpu/standalone/docker-compose.yml)
