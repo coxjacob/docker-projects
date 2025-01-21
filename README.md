@@ -18,5 +18,5 @@ docker compose up -d --build
 ## Folders
 ### Docker_Volumes
 
-This folder demonstrates the use of volumes with a single container. This code uses a Dockerfile and docker-compose.yml file to create a container and two volumes. The container reads from one volume, input_files, and rights 
+This folder demonstrates the use of volumes with a single container. This code uses a Dockerfile and docker-compose.yml file to create a container and two volumes. The container reads from one volume, input_files, and writes 
 to another, export_files.
